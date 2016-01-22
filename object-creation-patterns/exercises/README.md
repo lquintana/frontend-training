@@ -1,19 +1,12 @@
 1 - Generate from the following object a constructor function
 
 ```javascript
-var person = {
-    _name: "Juan",
 
-    getName: function() {
-        return this._name;
-    },
+function Person (name) {
 
-    getSteps: function() {
+    var _name = name;
 
-        return this.walk.steps;
-    },
-
-    walk: (function () {
+    this.walk = (function() {
 
         function walk() {
 
@@ -24,18 +17,34 @@ var person = {
 
         return walk;
     })();
+
+    this.getName = function(){
+        return this._name;
+    }
+
+    this.getSteps = function () {
+        return this.walk.steps;
+    }
 };
+
+var person = new Person({name:'Juan'});
 ```
 
 2 - Implement a function `construct` with the following signature:
 
 `construct(Constructor: Function, args: Array): Object`
 
-It must reproduce exactly the behaviour of the operator `new`. 
+It must reproduce exactly the behaviour of the operator `new`.
 
 **Example**
 
 ```javascript
+function construct (constructor, arr) {
+    for (var i = 0; i<= arr.length; i+=1) {
+        return new constructor(arr[i]);
+    }
+}
+
 function Person(name) {
 
     this._name = name;
