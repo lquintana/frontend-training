@@ -8,9 +8,23 @@
     <script type="text/javascript">
 
     /////////// Ejercicio 1 //////////////
-    // Escribir un wrapper "parseJSON" de JSON.parse que reciba un parámetro, 
-    // que devuelva una promise y se resuelva o se rejecte según si 
+    // Escribir un wrapper "parseJSON" de JSON.parse que reciba un parámetro,
+    // que devuelva una promise y se resuelva o se rejecte según si
     // el elemento pasado por parámetro es json válido o no
+
+    function parseJSON (json) {
+
+        return new Promise (function (resolve, reject){
+            try {
+                resolve(JSON.parse(json));
+            } catch (error) {
+                reject(error);
+            }
+        });
+
+    }
+
+
 
     /////////// Ejercicio 2 //////////////
     // Escribir una función "arePrime" que acepte una promise o array de promises por parámetro
@@ -19,7 +33,6 @@
 
     </script>
     <script type="text/javascript" src="promises-post.js"></script>
-    </script>
   </head>
   <body>
   </body>
