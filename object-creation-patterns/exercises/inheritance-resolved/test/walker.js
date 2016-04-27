@@ -14,7 +14,7 @@ describe("Walker", function () {
         var initialOxygen = 2;
         var legs = 2;
 
-        var walker = new Walker(initialOxygen, legs);
+        var walker = new Walker(legs);
 
         var actual   = Object.getPrototypeOf(walker);
         var expected = Walker.prototype;
@@ -29,7 +29,7 @@ describe("Walker", function () {
             var initialOxygen = 2;
             var legs = undefined;
 
-            var walker = new Walker(initialOxygen, legs);
+            var walker = new Walker(legs);
         });
     });
 
@@ -40,7 +40,7 @@ describe("Walker", function () {
             var initialOxygen = 2;
             var legs = 0;
 
-            var walker = new Walker(initialOxygen, legs);
+            var walker = new Walker(legs);
         });
     });
 
@@ -51,7 +51,7 @@ describe("Walker", function () {
             var initialOxygen = 2;
             var legs = 1;
 
-            var walker = new Walker(initialOxygen, legs);
+            var walker = new Walker(legs);
         });
     });
 
@@ -62,7 +62,7 @@ describe("Walker", function () {
             var initialOxygen = 2;
             var legs = 2;
 
-            var walker = new Walker(initialOxygen, legs);
+            var walker = new Walker(legs);
         });
     });
 
@@ -75,7 +75,7 @@ describe("Walker", function () {
                 var initialOxygen = 2;
                 var legs = 2;
 
-                var walker = new Walker(initialOxygen, legs);
+                var walker = new Walker(legs);
 
                 var actual   = walker.getLegs();
                 var expected = legs;
@@ -91,7 +91,7 @@ describe("Walker", function () {
                 var initialOxygen = 2;
                 var legs = 2;
 
-                var walker = new Walker(initialOxygen, legs);
+                var walker = new Walker(legs);
 
                 var actual   = walker.getLegs();
                 var expected = legs;
@@ -107,7 +107,7 @@ describe("Walker", function () {
                 var initialOxygen = 2;
                 var legs = 2;
 
-                var walker = new Walker(initialOxygen, legs);
+                var walker = new Walker(legs);
 
                 walker.walk();
 

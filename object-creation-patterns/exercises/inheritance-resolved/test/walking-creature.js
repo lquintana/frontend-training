@@ -56,14 +56,14 @@ describe("WalkingCreature", function () {
 
             it("must throw an error if it has died", function () {
 
-                var initialOxygen = 2;
+                var initialOxygen = 0;
                 var legs = 2;
 
                 var wc = new WalkingCreature(initialOxygen, legs);
 
                 assert.throws(function () {
 
-                    WalkingCreature.walk();
+                    wc.walk();
                 });
             });
 
@@ -74,9 +74,9 @@ describe("WalkingCreature", function () {
 
                 var wc = new WalkingCreature(initialOxygen, legs);
 
-                WalkingCreature.walk();
+                wc.walk();
 
-                var actual   = WalkingCreature.getSteps();
+                var actual   = wc.getSteps();
                 var expected = 1;
 
                 assert(actual === expected);
@@ -89,9 +89,9 @@ describe("WalkingCreature", function () {
 
                 var wc = new WalkingCreature(initialOxygen, legs);
 
-                WalkingCreature.walk();
+                wc.walk();
 
-                var actual   = WalkingCreature.getRemainingOxygen();
+                var actual   = wc.getRemainingOxygen();
                 var expected = initialOxygen - 1;
 
                 assert(actual === expected);
