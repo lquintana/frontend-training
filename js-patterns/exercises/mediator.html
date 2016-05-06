@@ -7,10 +7,30 @@
   <script type="text/javascript">
     var mediator = (function() {
       var listeners = {};
-      return {
-        publish: function() {} // should receive an event name and a potencial parameter to send to all the listeners
-      , subscribe: function() {} // should receive an event name and a function to act as handler
-      , installTo: function() {} // should add the "subscribe" and "publish" methods to the received object
+
+          return {
+            publish: function(eventName, data) {
+                // should receive an event name and a potencial parameter to send to all the listeners
+
+                if (listeners[eventName]) {
+                    listeners[eventName].forEach(function (handler){
+                        handler(data);
+                    });
+                }
+            }
+          , subscribe: function(eventName, handler) {
+              // should receive an event name and a function to act as handler
+
+              if (listeners[eventName]) {
+                  listeners[eventName].push(handler);
+              }else{
+                  listeners[eventName] = [handler];
+              }
+          }
+          , installTo: function(obj) {
+              obj.publish = this.publish;
+              obj.subscribe = this.subscribe;
+          } // should add the "subscribe" and "publish" methods to the received object
       }
       // HINT: you can re-use the implementation of the event aggregator excercise
     })();
@@ -31,14 +51,20 @@
 <body>
  <h1>Chat</h1>
 <form id="chatForm">
+
     <label for="fromBox">Your Name:</label>
     <input id="fromBox" type="text"/>
+
     <br />
+
     <label for="toBox">Send to:</label>
     <input id="toBox" type="text"/>
+
     <br />
+
     <label for="chatBox">Message:</label>
     <input id="chatBox" type="text"/>
+
     <button action="submit">Chat</button>
 </form>
 
