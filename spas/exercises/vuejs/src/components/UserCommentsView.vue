@@ -1,10 +1,15 @@
 <template>
-  <!-- Using the 'store.fetchUser' API add a list of the user's comments, 
+  <!-- Using the 'store.fetchUser' API add a list of the user's comments,
   similarly how it's being done in the ItemView component...
     Remember that the store.fetchItem API does not distinguish between comments, stories or polls.
     You will have to filter to leave only the ones that have type 'comments'.
     To view the full docs on how the data is formatted you can see https://github.com/HackerNews/API#items
    -->
+   <comment
+     v-for="comment in comments"
+     :comment="comment">
+   </comment>
+
 </template>
 
 <script>
@@ -18,9 +23,9 @@ export default {
   components: {
     Comment
   },
-
   data () {
     return {
+        comments: []
       // here initialize the fields your view will need
     }
   },
@@ -39,8 +44,24 @@ export default {
       // http://router.vuejs.org/en/pipeline/data.html#promise-sugar
       document.title = `User's comments: ${to.params.id} | Vue.js HN Clone`;
 
+      return store.fetchUser(to.params.id).then(function(user) {
+          return store.fetchItems(user.submitted).then(function(items){
 
-      // user the 'store.emit' API to change the title emitting the 'titleChange' event
+              var comments = [];
+
+              items.forEach(function(item, index){
+                  if (item.type === 'comment') {
+                      comments.push(item);
+                  }
+              });
+
+              return {
+                  'comments': comments
+              }
+          });
+      });
+
+      // use the 'store.emit' API to change the title emitting the 'titleChange' event
       // the title should be in the format: "username's comments"
 
       // use the mentioned 'store.fetchUser' and 'store.fetchItems' to return an object
